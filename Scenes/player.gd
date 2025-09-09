@@ -2,7 +2,13 @@ extends CharacterBody2D
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var hurtbox = $HurtBox
+@onready var attack_area = $AttackArea
 
+#Health
+var health = 100
+
+#Speed
 const SPEED = 220.0
 const JUMP_VELOCITY = -240.0
 const DASH_SPEED = 440.0
@@ -18,7 +24,7 @@ var is_dashing = false
 #Attack
 var attack_cooldown_timer = 0.0
 var is_attacking = false
-var attack_direction = 1  # Store direction during attack
+var attack_direction = 1  
 
 
 func _physics_process(delta: float) -> void:
@@ -76,7 +82,6 @@ func _physics_process(delta: float) -> void:
 
 	# Handle animations based on player state
 	update_animation()
-
 	move_and_slide()
 
 func start_dash():
@@ -115,6 +120,14 @@ func start_attack():
 	# Set is_attacking to false when attack animation finishes
 	await animation_player.animation_finished
 	is_attacking = false
+
+func _trigger_attack_damage():
+	var overlapping_objects = attack_area.get_overlapping_bodies()
+	for body in overlapping_objects:
+		print(body.name)
+		# Check if the body has a take_damage function (like batu)
+		if body.has_method("take_damage"):
+			body.take_damage()
 
 func update_animation():
 	# Don't change animation if dashing or attacking

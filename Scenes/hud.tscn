@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqqgkrl6d64hm"]
+
+[ext_resource type="Script" uid="uid://bq1vsj0ef1fd1" path="res://Scripts/hud.gd" id="1_hud"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hud")
+
+[node name="DiamondCounter" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -69.0
+offset_right = -21.98
+offset_bottom = -20.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+text = "0"

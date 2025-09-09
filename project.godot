@@ -13,7 +13,10 @@ config_version=5
 config/name="PLayerLearning"
 run/main_scene="uid://33rsxp1yqed"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://Scripts/game_manager.gd"
 
 [input]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://coxtr28032x43"]
+[gd_scene load_steps=55 format=3 uid="uid://coxtr28032x43"]
 
 [ext_resource type="Script" uid="uid://de6i50hhuvph8" path="res://Scenes/player.gd" id="1_sweqm"]
 [ext_resource type="Texture2D" uid="uid://caxp5086mm6cn" path="res://Assets/Warrior/idle/Warrior_Idle_1.png" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://bqqgkrl6d64hm" path="res://Scenes/hud.tscn" id="2_hud"]
 [ext_resource type="Texture2D" uid="uid://dxkvvukqwlpfx" path="res://Assets/Warrior/Jump/Warrior_Jump_1.png" id="2_xwi16"]
 [ext_resource type="Texture2D" uid="uid://cn6aaov2l6i51" path="res://Assets/Warrior/Jump/Warrior_Jump_2.png" id="3_sweqm"]
 [ext_resource type="Texture2D" uid="uid://bp40pvfxns6yn" path="res://Assets/Warrior/Jump/Warrior_Jump_3.png" id="4_ph33w"]
@@ -61,6 +62,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("32_by7i4"), ExtResource("33_3uvy8"), ExtResource("34_ss172"), ExtResource("35_jmelf"), ExtResource("36_bjdqd"), ExtResource("37_feq18"), ExtResource("38_wcnj3"), ExtResource("39_jsob3"), ExtResource("40_pg0gw")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_trigger_attack_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_5cld6"]
@@ -194,6 +209,13 @@ _data = {
 &"Run": SubResource("Animation_f1uaf")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqm"]
+radius = 7.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ph33w"]
+size = Vector2(27, 31)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_sweqm")
 
@@ -209,3 +231,25 @@ libraries = {
 &"": SubResource("AnimationLibrary_4grkl")
 }
 autoplay = "Idle"
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-4, 5)
+shape = SubResource("CapsuleShape2D_sweqm")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(18.5, 2.5)
+shape = SubResource("RectangleShape2D_ph33w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -10)
+zoom = Vector2(4, 4)
+
+[node name="HUD" parent="Camera2D" instance=ExtResource("2_hud")]
+offset_left = 74.0
+offset_top = 2.0
+offset_right = 74.0
+offset_bottom = 2.0

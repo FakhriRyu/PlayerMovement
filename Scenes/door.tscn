@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhy5udlks1ilx"]
+
+[ext_resource type="Script" uid="uid://dnk7ufa17av2v" path="res://Scripts/door.gd" id="1_door"]
+[ext_resource type="Texture2D" uid="uid://cx4fkea1e7rrk" path="res://Assets/PNG/tileset.png" id="1_w6aom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0e35"]
+size = Vector2(16, 32)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_door")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w6aom")
+region_enabled = true
+region_rect = Rect2(224, 64, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p0e35")
+
+[node name="DiamondLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+offset_bottom = -20.0
+text = "0/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

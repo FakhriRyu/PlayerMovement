@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cye8dlks7k53o"]
+
+[ext_resource type="Texture2D" uid="uid://mnvmtvqdteu3" path="res://Assets/PNG/items16x16.png" id="1_1jaca"]
+[ext_resource type="Script" uid="uid://bmowannuwal1o" path="res://Scripts/diamond.gd" id="1_2jaca"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tjcex"]
+radius = 7.0
+
+[node name="Diamond" type="Area2D"]
+script = ExtResource("1_2jaca")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1jaca")
+region_enabled = true
+region_rect = Rect2(65, 52, 14, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tjcex")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
